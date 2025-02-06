@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Habitacions{% endblock %}
+
+{% block principal %}
+<!-- Breadcrumb Section Begin -->
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text">
+                    <h2>Our Rooms</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Section End -->
+
+<!-- Rooms Section Begin -->
+<section class="rooms-section spad">
+    <div class="container">
+        <div class="row">
+        {% for habitacio in habitacios %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="room-item">
+                        <img src="{{ asset(habitacio.getUrlSubidas()) }}" alt="">
+                        <div class="ri-text">
+                            <h4>{{ habitacio.nombre }}</h4>
+                            <h3>{{ habitacio.preu }}€<span>/Noche</span></h3>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="r-o">Tamaño:</td>
+                                        <td>{{ habitacio.tamany }}m<sup>2</sup></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">Capacidad:</td>
+                                        <td>{{ habitacio.capacitat }} Personas Máximo</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">Localización:</td>
+                                        <td>{{ habitacio.localitzacio }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <a href="{{ path('app_habitacio_show', {'id': habitacio.id}) }}" style="margin-right: 1em" class="primary-btn">More Details</a>
+                            <a href="{{ path('app_habitacio_edit', {'id': habitacio.id}) }}" class="primary-btn">Editar</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- Rooms Section End -->
+
+{% endblock %}

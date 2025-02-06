@@ -4,10 +4,15 @@ namespace App\Entity;
 
 use App\Repository\HabitacioRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: HabitacioRepository::class)]
 class Habitacio
 {
+    const RUTA_IMAGEN_HABITACION_SUBIDAS = '/images/habitaciones/';
+
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -29,10 +34,35 @@ class Habitacio
     private ?int $preu = null;
 
     #[ORM\Column(length: 255)]
+    /**
+    * @Assert\File(
+    * mimeTypes={"image/jpeg","image/png"},
+    * mimeTypesMessage = "Solamente se permiten archivos jpeg o png.")
+    */
     private ?string $nombreImatge = null;
 
     #[ORM\Column]
     private ?int $idClient = null;
+
+    public function __construct(
+        $nombre = "",
+        $tamany = 0,
+        $capacitat = 0,
+        $localitzacio = "",
+        $preu = 0,
+        $nombreImatge = ""
+    )
+    {
+        $this->id = null;
+        $this->nombre = $nombre;
+        $this->tamany = $tamany;
+        $this->capacitat = $capacitat;
+        $this->localitzacio = $localitzacio;
+        $this->preu = $preu;
+        $this->nombreImatge = $nombreImatge;
+        $this->idClient = 0;
+    }
+
 
     public function getId(): ?int
     {
@@ -122,4 +152,9 @@ class Habitacio
 
         return $this;
     }
+
+    public function getUrlSubidas(){
+        return self::RUTA_IMAGEN_HABITACION_SUBIDAS . $this->getNombreImatge();
+    }
+
 }

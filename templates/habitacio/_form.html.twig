@@ -1,0 +1,37 @@
+{{ form_start(form) }}
+<section class="contact-section spad">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7 contact-form">
+                <hr>
+	            <div class="my-custom-class-for-errors">
+		            {{ form_errors(form) }}
+	            </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        {{ form_row(form.nombre) }}
+                    </div>
+                    <div class="col-lg-12">
+                        {{ form_row(form.tamany) }}
+                    </div>
+                    <div class="col-lg-12">
+                        {{ form_row(form.capacitat) }}
+                    </div>
+                    <div class="col-lg-12">
+                        {{ form_row(form.localitzacio) }}
+                    </div>
+                    <div class="col-lg-12">
+                        {{ form_row(form.preu) }}
+                    </div>
+                    <div class="col-lg-12">
+                        {{ form_row(form.nombreImatge) }}
+                    </div>
+                    <div class="col-lg-12 text-center">
+                        <button class="btn">{{ button_label|default('Insertar') }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{{ form_end(form) }}

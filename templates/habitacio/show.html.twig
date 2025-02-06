@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Habitacio{% endblock %}
+
+{% block body %}
+    <h1>Habitacio</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ habitacio.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ habitacio.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Tamany</th>
+                <td>{{ habitacio.tamany }}</td>
+            </tr>
+            <tr>
+                <th>Capacitat</th>
+                <td>{{ habitacio.capacitat }}</td>
+            </tr>
+            <tr>
+                <th>Localitzacio</th>
+                <td>{{ habitacio.localitzacio }}</td>
+            </tr>
+            <tr>
+                <th>Preu</th>
+                <td>{{ habitacio.preu }}</td>
+            </tr>
+            <tr>
+                <th>NombreImatge</th>
+                <td>{{ habitacio.nombreImatge }}</td>
+            </tr>
+            <tr>
+                <th>IdClient</th>
+                <td>{{ habitacio.idClient }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_habitacio_index') }}">back to list</a>
+
+    <a href="{{ path('app_habitacio_edit', {'id': habitacio.id}) }}">edit</a>
+
+    {{ include('habitacio/_delete_form.html.twig') }}
+{% endblock %}

@@ -41,10 +41,32 @@
                     <div class="nav-menu">
                         <nav class="mainmenu">
                             <ul>
-                                {# <?php if (Utils::esOpcionMenuActiva('/') == true)
-                                    echo '<li class="active">';
-                                else echo '<li>'; ?>
-                                <a href="/">Home</a></li>
+                                {% if app.request.pathinfo=='/index' or app.request.pathinfo=='/' %}
+                                    <li class="active lien">
+                                {% else %}
+                                    <li class="lien">
+                                {% endif %}
+                                    <a href={{ path('sym_index') }}>Home</a>
+                                </li>
+
+                                {% if app.request.pathinfo=='/habitacio'%}
+                                    <li class="active lien">
+                                {% else %}
+                                    <li class="lien">
+                                {% endif %}
+                                    <a href={{ path('app_habitacio_index') }}>Rooms</a>
+                                </li>
+
+                                {% if app.request.pathinfo=='/habitacio/new'%}
+                                    <li class="active lien">
+                                {% else %}
+                                    <li class="lien">
+                                {% endif %}
+                                    <a href={{ path('app_habitacio_new') }}>Insertar Habitación</a>
+                                </li>
+
+
+                                {# 
 
                                 <?php if (!is_null($app['user']) && 
                                 $app['user']->getRole() == 'ROLE_ADMIN') : ?>
