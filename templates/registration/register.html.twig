@@ -2,18 +2,33 @@
 
 {% block title %}Register{% endblock %}
 
-{% block body %}
-    <h1>Register</h1>
+{% block principal %}
+<section class="contact-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 offset-lg-1">
+                <h2>Registrarse</h2>
+                <hr>
 
-    {{ form_errors(registrationForm) }}
+                {{ form_errors(registrationForm) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+                {{ form_start(registrationForm, {'attr': {'class': 'contact-form', 'enctype': 'multipart/form-data'}}) }}
+                    <div class="row">
+                        <div class="col-lg-12">
+                            {{ form_row(registrationForm.username, {'attr': {'placeholder': 'Usuario'}}) }}
+                        </div>
+                        <div class="col-lg-12">
+                            {{ form_row(registrationForm.plainPassword, {
+                                label: 'Password'
+                            }) }}
+                        </div>
+                        <div class="col-lg-12">
+                            <button type="submit" class="btn">Register</button>
+                        </div>
+                    </div>
+                {{ form_end(registrationForm) }}
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

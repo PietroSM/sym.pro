@@ -16,10 +16,35 @@ use Symfony\Component\Routing\Attribute\Route;
 final class HabitacioController extends AbstractController
 {
     #[Route(name: 'app_habitacio_index', methods: ['GET'])]
-    public function index(HabitacioRepository $habitacioRepository): Response
+    #[Route('/orden/{ordenacion}', name:'app_habitacio_index_ordenat', methods: ['GET'])]
+    public function index(Request $requestStack ,HabitacioRepository $habitacioRepository, string $ordenacion=null): Response
     {
+        if(!is_null($ordenacion)){
+            $tipoOrdenacion='asc';
+            $session = $requestStack->getSession();
+            $habitacioOrdenacion = $session->get('habitacioOrdenacion');
+
+            if(!is_null($habitacioOrdenacion)){
+                if($habitacioOrdenacion['ordenacion'] === $ordenacion){
+                    if($habitacioOrdenacion['tipoOrdenacion'] === 'asc'){
+                        $tipoOrdenacion='desc';
+                    }
+                }
+            }
+
+            $session->set('habitacioOrdenacion', [ // Se guarda la ordenación actual
+                'ordenacion'=>$ordenacion,
+                'tipoOrdenacion'=>$tipoOrdenacion
+                ]);
+            
+        } else {
+            $ordenacion='id';
+            $tipoOrdenacion='asc';
+        }
+
+        $habitacions = $habitacioRepository->findBy([], [$ordenacion=>$tipoOrdenacion]);
         return $this->render('habitacio/index.html.twig', [
-            'habitacios' => $habitacioRepository->findAll(),
+            'habitacios' => $habitacions,
         ]);
     }
 

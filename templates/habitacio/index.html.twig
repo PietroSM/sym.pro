@@ -11,6 +11,10 @@
                 <div class="breadcrumb-text">
                     <h2>Our Rooms</h2>
                 </div>
+                <th><a href="{{ path("app_habitacio_index_ordenat", {ordenacion: 'nombre'}) }}" style="color:black; margin-right: 1em" class="primary-btn">Nombre</a></th>
+                <th><a href="{{ path("app_habitacio_index_ordenat", {ordenacion: 'localitzacio'}) }}" style="color:black; margin-right: 1em" class="primary-btn">Localización</a></th>
+                <th><a href="{{ path("app_habitacio_index_ordenat", {ordenacion: 'capacitat'}) }}" style="color:black; margin-right: 1em" class="primary-btn">Capacidad</a></th>
+                <th><a href="{{ path("app_habitacio_index_ordenat", {ordenacion: 'preu'}) }}" style="color:black;" class="primary-btn">Precio</a></th>
             </div>
         </div>
     </div>
