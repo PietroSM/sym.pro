@@ -7,6 +7,7 @@ use App\Form\HabitacioType;
 use App\Repository\HabitacioRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -55,6 +56,14 @@ final class HabitacioController extends AbstractController
         ]);
     }
 
+
+    #[Route('/{id}', name:'app_habitacio_delete_json', methods:['DELETE'])]
+    public function deleteJson(Habitacio $habitacio, HabitacioRepository $habitacioRepository): Response {
+        $habitacioRepository->remove($habitacio, true);
+        return new JsonResponse(['eliminado' => true]);
+    }
+
+
     #[Route('/{id}', name: 'app_habitacio_show', methods: ['GET'])]
     public function show(Habitacio $habitacio): Response
     {
@@ -91,4 +100,8 @@ final class HabitacioController extends AbstractController
 
         return $this->redirectToRoute('app_habitacio_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+
+
 }

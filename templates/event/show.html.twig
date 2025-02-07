@@ -36,7 +36,8 @@
                 <div class="button-group mt-4">
                     <a href="{{ path('app_event_index') }}" class="btn btn-primary">Volver a la lista</a>
                     <a href="{{ path('app_event_edit', {'id': event.id}) }}" class="btn btn-warning">Editar</a>
-                    {{ include('event/_delete_form.html.twig') }}
+                    <a href="{{ path('app_event_delete_json',{'id':event.id}) }}" class="btn btn-danger delete">Borrar</a>
+
                 </div>
             </div>
         </div>

@@ -44,33 +44,33 @@
     <div class="container-fluid">
         <div class="hp-room-items">
             <div class="row">
-                {# <?php foreach ($habitaciones as $habitacion) : ?>
+                {% for habitacio in habitacions %}
                     <div class="col-lg-3 col-md-6">
-                        <div class="hp-room-item set-bg" data-setbg="<?= $habitacion->getUrlSubidas() ?>">
+                        <div class="hp-room-item set-bg" data-setbg="{{ asset(habitacio.getUrlSubidas()) }}">
                             <div class="hr-text">
-                                <h3><?= $habitacion->getNombre() ?></h3>
-                                <h2><?= $habitacion->getPrecio() ?>€<span>/Noche</span></h2>
+                                <h3>{{ habitacio.nombre }}</h3>
+                                <h2>{{ habitacio.preu }}€<span>/Noche</span></h2>
                                 <table>
                                     <tbody>
                                         <tr>
                                             <td class="r-o">Tamaño:</td>
-                                            <td><?= $habitacion->getTamanyo() ?>m<sup>2</sup></td>
+                                            <td>{{ habitacio.tamany }}m<sup>2</sup></td>
                                         </tr>
                                         <tr>
                                             <td class="r-o">Capacidad:</td>
-                                            <td><?= $habitacion->getCapacidad() ?> Personas Máximo</td>
+                                            <td>{{ habitacio.capacitat }} Personas Máximo</td>
                                         </tr>
                                         <tr>
                                             <td class="r-o">Localización:</td>
-                                            <td><?= $habitacion->getLocalizacion() ?></td>
+                                            <td>{{ habitacio.localitzacio }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <a href="/rooms/<?= $habitacion->getId() ?>" class="primary-btn">More Details</a>
+                                <a href="{{ path('app_habitacio_show', {'id': habitacio.id}) }}" class="primary-btn">More Details</a>
                             </div>
                         </div>
                     </div>
-                <?php endforeach;  ?> #}
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -89,17 +89,17 @@
             </div>
         </div>
         <div class="row">
-            {# <?php foreach ($eventos as $event) : ?>
+            {% for event in events %}
                 <div class="col-lg-4">
-                    <div class="blog-item set-bg" data-setbg="<?=$event->getUrlSubidas()?>">
+                    <div class="blog-item set-bg" data-setbg="{{ asset(event.getUrlSubidas()) }}">
                         <div class="bi-text">
                             <span class="b-tag">Travel Trip</span>
-                            <h4><a href="#"><?=$event->getNombre()?></a></h4>
-                            <div class="b-time"><i class="icon_clock_alt"></i><?=$event->getFecha()?></div>
+                                <h4><a href="{{ path('app_event_show', {'id': event.id}) }}">{{ event.nombre }}</a></h4>
+                            <div class="b-time"><i class="icon_clock_alt"></i>{{ event.fecha }}</div>
                         </div>
                     </div>
                 </div>
-            <?php endforeach;  ?> #}
+            {% endfor %}
         </div>
     </div>
 </section>

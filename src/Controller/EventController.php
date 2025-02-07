@@ -7,6 +7,7 @@ use App\Form\EventType;
 use App\Repository\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -91,5 +92,12 @@ final class EventController extends AbstractController
         }
 
         return $this->redirectToRoute('app_event_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+
+    #[Route('/{id}', name: 'app_event_delete_json', methods:['DELETE'])]
+    public function deleteJson(Event $event, EventRepository $eventRepository): Response {
+        $eventRepository->remove($event, true);
+        return new JsonResponse(['eliminado' => true]);
     }
 }

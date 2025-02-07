@@ -16,6 +16,15 @@ class HabitacioRepository extends ServiceEntityRepository
         parent::__construct($registry, Habitacio::class);
     }
 
+
+    public function remove(Habitacio $entity, bool $flush=false): void {
+        $this->getEntityManager()->remove($entity);
+
+        if($flush){
+            $this->getEntityManager()->flush();
+        }
+    }
+
     //    /**
     //     * @return Habitacio[] Returns an array of Habitacio objects
     //     */
