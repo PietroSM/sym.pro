@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detalle Evento{% endblock %}
+
+{% block principal %}
+<!-- Event Details Section Begin -->
+<section class="event-details-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="event-details-item">
+                    <img src="{{ asset(event.getUrlSubidas()) }}" alt="Imagen del evento" class="img-fluid mb-4">
+                    <div class="ed-text">
+                        <div class="ed-title">
+                            <h3>{{ event.nombre }}</h3>
+                            <div class="edt-right">
+                                <span>{{ event.fecha|date('d-m-Y') }}</span>
+                            </div>
+                        </div>
+                        <p>{{ event.descripcion }}</p>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td class="r-o">Fecha:</td>
+                                    <td>{{ event.fecha|date('d-m-Y') }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="r-o">Ubicación:</td>
+                                    <td>{{ event.localitzacio }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- Buttons for navigation and actions -->
+                <div class="button-group mt-4">
+                    <a href="{{ path('app_event_index') }}" class="btn btn-primary">Volver a la lista</a>
+                    <a href="{{ path('app_event_edit', {'id': event.id}) }}" class="btn btn-warning">Editar</a>
+                    {{ include('event/_delete_form.html.twig') }}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Event Details Section End -->
+{% endblock %}

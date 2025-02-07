@@ -1,50 +1,54 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Habitacio{% endblock %}
+{% block title %}Detallle Habitación{% endblock %}
 
-{% block body %}
-    <h1>Habitacio</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ habitacio.id }}</td>
-            </tr>
-            <tr>
-                <th>Nombre</th>
-                <td>{{ habitacio.nombre }}</td>
-            </tr>
-            <tr>
-                <th>Tamany</th>
-                <td>{{ habitacio.tamany }}</td>
-            </tr>
-            <tr>
-                <th>Capacitat</th>
-                <td>{{ habitacio.capacitat }}</td>
-            </tr>
-            <tr>
-                <th>Localitzacio</th>
-                <td>{{ habitacio.localitzacio }}</td>
-            </tr>
-            <tr>
-                <th>Preu</th>
-                <td>{{ habitacio.preu }}</td>
-            </tr>
-            <tr>
-                <th>NombreImatge</th>
-                <td>{{ habitacio.nombreImatge }}</td>
-            </tr>
-            <tr>
-                <th>IdClient</th>
-                <td>{{ habitacio.idClient }}</td>
-            </tr>
-        </tbody>
-    </table>
-
+{% block principal %}
+<!-- Room Details Section Begin -->
+<section class="room-details-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="room-details-item">
+                    <img src="{{ asset(habitacio.getUrlSubidas()) }}" alt="">
+                    <div class="rd-text">
+                        <div class="rd-title">
+                            <h3>{{ habitacio.nombre }}</h3>
+                            <div class="rdt-right">
+                                {# <?php if ($habitacio->getidClient() == 0): ?>
+                                    <a href="/reservar/<?php echo $habitacio->getId(); ?>">Booking Now</a>
+                                <?php else: ?>
+                                    <a href="#" disabled>RESERVADO</a>
+                                <?php endif; ?> #}
+                            </div>
+                        </div>
+                        <h2>{{ habitacio.preu }}€<span>/Noche</span></h2>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="r-o">Tamaño:</td>
+                                    <td>{{ habitacio.tamany }}m<sup>2</sup></td>
+                                </tr>
+                                <tr>
+                                    <td class="r-o">Capacidad:</td>
+                                    <td>{{ habitacio.capacitat }} Personas Máximo</td>
+                                </tr>
+                                <tr>
+                                    <td class="r-o">Localización:</td>
+                                    <td>{{ habitacio.localitzacio }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>
+                            <img src="<?= $habitacio->getUrlSubidas() ?>" alt="">
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Room Details Section End -->
     <a href="{{ path('app_habitacio_index') }}">back to list</a>
-
-    <a href="{{ path('app_habitacio_edit', {'id': habitacio.id}) }}">edit</a>
 
     {{ include('habitacio/_delete_form.html.twig') }}
 {% endblock %}

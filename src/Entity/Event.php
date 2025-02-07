@@ -8,6 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: EventRepository::class)]
 class Event
 {
+    const RUTA_IMAGEN_EVENTS_SUBIDAS = '/images/events/';
+
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -23,6 +26,11 @@ class Event
     private ?string $descripcion = null;
 
     #[ORM\Column(length: 255)]
+    /**
+    * @Assert\File(
+    * mimeTypes={"image/jpeg","image/png"},
+    * mimeTypesMessage = "Solamente se permiten archivos jpeg o png.")
+    */
     private ?string $nombreImatge = null;
 
     #[ORM\Column(length: 255)]
@@ -92,4 +100,10 @@ class Event
 
         return $this;
     }
+
+
+    public function getUrlSubidas(){
+        return self::RUTA_IMAGEN_EVENTS_SUBIDAS . $this->getNombreImatge();
+    }
+
 }

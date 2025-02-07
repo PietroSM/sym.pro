@@ -65,6 +65,22 @@
                                     <a href={{ path('app_habitacio_new') }}>Insertar Habitación</a>
                                 </li>
 
+                                {% if app.request.pathinfo=='/event'%}
+                                    <li class="active lien">
+                                {% else %}
+                                    <li class="lien">
+                                {% endif %}
+                                    <a href={{ path('app_event_index') }}>Events</a>
+                                </li>
+
+                                {% if app.request.pathinfo=='/event/new'%}
+                                    <li class="active lien">
+                                {% else %}
+                                    <li class="lien">
+                                {% endif %}
+                                    <a href={{ path('app_event_new') }}>Insertar Evento</a>
+                                </li>
+
 
                                 {# 
 
