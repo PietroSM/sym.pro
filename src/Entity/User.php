@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -32,6 +34,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    /**
+     * @var Collection<int, Habitacio>
+     */
+    #[ORM\OneToMany(targetEntity: Habitacio::class, mappedBy: 'id_client')]
+    private Collection $habitacios;
+
+    public function __construct()
+    {
+        $this->habitacios = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -106,5 +119,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection<int, Habitacio>
+     */
+    public function getHabitacios(): Collection
+    {
+        return $this->habitacios;
+    }
+
+    public function addHabitacio(Habitacio $habitacio): static
+    {
+        if (!$this->habitacios->contains($habitacio)) {
+            $this->habitacios->add($habitacio);
+            $habitacio->setIdClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHabitacio(Habitacio $habitacio): static
+    {
+        if ($this->habitacios->removeElement($habitacio)) {
+            // set the owning side to null (unless already changed)
+            if ($habitacio->getIdClient() === $this) {
+                $habitacio->setIdClient(null);
+            }
+        }
+
+        return $this;
     }
 }

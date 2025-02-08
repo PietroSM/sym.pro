@@ -44,6 +44,9 @@ class Habitacio
     #[ORM\Column]
     private ?int $idClient = null;
 
+    #[ORM\ManyToOne(inversedBy: 'habitacios')]
+    private ?User $id_client = null;
+
     public function __construct(
         $nombre = "",
         $tamany = 0,
@@ -149,6 +152,19 @@ class Habitacio
     public function setIdClient(int $idClient): static
     {
         $this->idClient = $idClient;
+
+        return $this;
+    }
+
+
+    public function getId_Client(): ?User
+    {
+        return $this->id_client;
+    }
+
+    public function setId_Client(USer $id_client): static
+    {
+        $this->id_client = $id_client;
 
         return $this;
     }

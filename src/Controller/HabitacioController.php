@@ -82,6 +82,33 @@ final class HabitacioController extends AbstractController
     }
 
 
+    #[Route('/busqueda', name:'app_habitacio_index_busqueda', methods:['POST'])]
+    public function busqueda(Request $request, HabitacioRepository $habitacioRepository): Response{
+        $busqueda = $request->request->get('busqueda');
+        $habitacions = $habitacioRepository->findLikeDescripcion($busqueda);
+
+        return $this->render('habitacio/index.html.twig', [
+            'habitacios' => $habitacions,
+        ]);
+
+    }
+
+
+    #[Route('/update/{id}', name: 'app_habitacio_update', methods: ['GET'])]
+    public function update(HabitacioRepository $habitacioRepository, EntityManagerInterface $entityManager, int $id): Response {
+        $habitacio = $habitacioRepository->find($id);
+        $usuario = $this->getUser();
+        $habitacio->setId_Client($usuario);
+        $entityManager->flush();
+
+        $habitacio = $habitacioRepository->find($id);
+        return $this->render('habitacio/show.html.twig',[
+            'habitacio' => $habitacio,
+        ]);
+    }
+
+
+
     #[Route('/{id}', name:'app_habitacio_delete_json', methods:['DELETE'])]
     public function deleteJson(Habitacio $habitacio, HabitacioRepository $habitacioRepository): Response {
         $habitacioRepository->remove($habitacio, true);

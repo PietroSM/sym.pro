@@ -15,11 +15,13 @@
                             <h3>{{ habitacio.nombre }}</h3>
                             <div class="rdt-right">
                                 <a href="{{ path('app_habitacio_delete_json',{'id':habitacio.id}) }}" class="delete">Borrar</a>
-                                {# <?php if ($habitacio->getidClient() == 0): ?>
-                                    <a href="/reservar/<?php echo $habitacio->getId(); ?>">Booking Now</a>
-                                <?php else: ?>
+   
+                                {% if habitacio.id is null %}
+                                    <a href="{{ path('app_habitacio_update',{'id':habitacio.id}) }}">Booking Now</a>
+                                {% else %}
                                     <a href="#" disabled>RESERVADO</a>
-                                <?php endif; ?> #}
+                                {% endif %}
+
                             </div>
                         </div>
                         <h2>{{ habitacio.preu }}€<span>/Noche</span></h2>

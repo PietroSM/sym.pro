@@ -17,12 +17,24 @@ class HabitacioRepository extends ServiceEntityRepository
     }
 
 
-    public function remove(Habitacio $entity, bool $flush=false): void {
+    public function remove(Habitacio $entity, bool $flush = false): void
+    {
         $this->getEntityManager()->remove($entity);
 
-        if($flush){
+        if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+
+    /**
+     * @return Habitacio[] Returns an array of Imagen objects
+     */
+    public function findLikeDescripcion(string $value): array
+    {
+        $qb = $this->createQueryBuilder('i');
+        $qb->Where($qb->expr()->like('i.nombre', ':val'))->setParameter('val', '%' . $value . '%');
+        return $qb->getQuery()->getResult();
     }
 
     //    /**

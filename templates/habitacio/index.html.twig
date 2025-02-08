@@ -15,6 +15,15 @@
                 <th><a href="{{ path("app_habitacio_index_ordenat", {ordenacion: 'localitzacio'}) }}" style="color:black; margin-right: 1em" class="primary-btn">Localización</a></th>
                 <th><a href="{{ path("app_habitacio_index_ordenat", {ordenacion: 'capacitat'}) }}" style="color:black; margin-right: 1em" class="primary-btn">Capacidad</a></th>
                 <th><a href="{{ path("app_habitacio_index_ordenat", {ordenacion: 'preu'}) }}" style="color:black;" class="primary-btn">Precio</a></th>
+                </br>
+                <form action="{{ path('app_habitacio_index_busqueda') }}" method="post" class="contact-form">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <input type="text" name="busqueda" id="busqueda" class="form-control" placeholder="Buscar habitación...">
+                            <button type="submit" class="btn btn-primary">Buscar</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
