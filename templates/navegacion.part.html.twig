@@ -49,13 +49,17 @@
                                     <a href={{ path('sym_index') }}>Home</a>
                                 </li>
 
-                                {% if app.request.pathinfo=='/habitacio'%}
-                                    <li class="active lien">
-                                {% else %}
-                                    <li class="lien">
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    {% if app.request.pathinfo=='/habitacio'%}
+                                        <li class="active lien">
+                                    {% else %}
+                                        <li class="lien">
+                                    {% endif %}
+                                        <a href={{ path('app_habitacio_index') }}>Rooms</a>
+                                    </li>
                                 {% endif %}
-                                    <a href={{ path('app_habitacio_index') }}>Rooms</a>
-                                </li>
+
+
 
                                 {% if app.request.pathinfo=='/habitacio/new'%}
                                     <li class="active lien">
