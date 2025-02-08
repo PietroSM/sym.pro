@@ -131,6 +131,21 @@ final class HabitacioController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // $file almacena el archivo subido
+            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
+            $file = $form['nombreImatge']->getData();
+
+            //Generar un nom unic
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+            // Move the file to the directory where brochures are stored
+            $file->move( $this->getParameter('habitacio_directory_gallery'),$fileName );
+
+            // Actualizamos el nombre del archivo en el objeto imagen al nuevo generado
+            $habitacio->setNombreImatge($fileName);
+
+
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_habitacio_index', [], Response::HTTP_SEE_OTHER);

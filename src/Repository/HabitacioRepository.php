@@ -37,6 +37,21 @@ class HabitacioRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+
+
+    public function findByLocationAndCapacity(string $localitzacio, int $capacitat): array
+    {
+        // Crear la consulta para filtrar por localización y capacidad
+        return $this->createQueryBuilder('h')
+            ->andWhere('h.localitzacio = :localitzacio')
+            ->andWhere('h.capacitat >= :capacitat')
+            ->setParameter('localitzacio', $localitzacio)
+            ->setParameter('capacitat', $capacitat)
+            ->getQuery()
+            ->getResult();
+    }
+
+
     //    /**
     //     * @return Habitacio[] Returns an array of Habitacio objects
     //     */
