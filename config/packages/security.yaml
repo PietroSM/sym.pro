@@ -13,6 +13,9 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        api:
+            pattern: ^/api
+            stateless: true
         main:
             lazy: true
             provider: app_user_provider
@@ -49,6 +52,7 @@ security:
         - { path: ^/login, roles: PUBLIC_ACCESS }
         - { path: ^/logout, roles: IS_AUTHENTICATED_FULLY }
 
+        - { path: ^/api, roles: PUBLIC_ACCESS }
 when@test:
     security:
         password_hashers:

@@ -1,0 +1,10 @@
+POST http://sym.pro/api/habitacionesapinueva
+Content-Type: application/json
+
+{
+    "nombre": "hola",
+    "tamany": "2",
+    "capacitat": "4",
+    "localitzacio": "Mutxamel",
+    "preu": "5"
+}
