@@ -31,6 +31,11 @@ class HabitacioBLL extends BaseBLL{
     }
 
 
+    public function getHabitaciones(string $order){
+        $habitaciones = $this->em->getRepository(Habitacio::class)->findBy([],[$order => 'ASC']);
+        return $this->entitiesToArray($habitaciones);
+    }
+
 
     public function toArray(Habitacio $habitacio){
         if(is_null($habitacio)){
@@ -49,5 +54,14 @@ class HabitacioBLL extends BaseBLL{
     }
 
 
+    public function actualizaHabitacion(Habitacio $habitacio, array $data){
+        $habitacio->setNombre($data['nombre']);
+        $habitacio->setTamany($data['tamany']);
+        $habitacio->setCapacitat($data['capacitat']);
+        $habitacio->setLocalitzacio($data['localitzacio']);
+        $habitacio->setPreu($data['preu']);
+
+        return $this->guardaValidando($habitacio);
+    }
 
 }

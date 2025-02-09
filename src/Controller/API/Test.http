@@ -1,3 +1,4 @@
+### POST de una Habitacio
 POST http://sym.pro/api/habitacionesapinueva
 Content-Type: application/json
 
@@ -8,3 +9,35 @@ Content-Type: application/json
     "localitzacio": "Mutxamel",
     "preu": "5"
 }
+
+### GET de una Habitacio
+GET http://sym.pro/api/habitacionesapi/2
+Content-Type: application/json
+
+
+### GET de todas las Habitacio
+GET http://sym.pro/api/habitacionesapi
+Content-Type: application/json
+
+
+### DELETE de una Habitacio
+DELETE http://sym.pro/api/habitacionesapi/7
+Content-Type: application/json
+
+
+### PUT de actualización de una Habitacio
+PUT http://sym.pro/api/habitacionesapi/7
+Content-Type: application/json
+
+{
+    "nombre": "hola2",
+    "tamany": "2",
+    "capacitat": "4",
+    "localitzacio": "Mutxamel",
+    "preu": "5"
+}
+
+
+### GET para obtener todos los datos ordenados
+GET http://sym.pro/api/habitacionesapi/ordenadas/nombre
+Content-Type: application/json
