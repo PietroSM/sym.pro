@@ -59,6 +59,8 @@ class DefaultController extends AbstractController {
     
     #[Route('/Cancelar/{id}', name: 'app_habitacio_cancelar', methods: ['GET'])]
     public function update(HabitacioRepository $habitacioRepository, EntityManagerInterface $entityManager, int $id): Response {
+        
+        $this->denyAccessUnlessGranted('ROLE_USER');
         $habitacio = $habitacioRepository->find($id);
         $habitacio->setId_Client(null);
         $entityManager->flush();

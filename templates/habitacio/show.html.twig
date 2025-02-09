@@ -14,7 +14,9 @@
                         <div class="rd-title">
                             <h3>{{ habitacio.nombre }}</h3>
                             <div class="rdt-right">
-                                <a href="{{ path('app_habitacio_delete_json',{'id':habitacio.id}) }}" class="delete">Borrar</a>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <a href="{{ path('app_habitacio_delete_json',{'id':habitacio.id}) }}" class="delete">Borrar</a>
+                                {% endif %}
                                 {% if habitacio.id_client is null %}
                                     <a href="{{ path('app_habitacio_update',{'id':habitacio.id}) }}">Booking Now</a>
                                 {% else %}
@@ -47,6 +49,5 @@
     </div>
 </section>
 <!-- Room Details Section End -->
-    <a href="{{ path('app_habitacio_index') }}">back to list</a>
 
 {% endblock %}

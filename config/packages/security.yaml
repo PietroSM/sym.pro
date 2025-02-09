@@ -38,9 +38,13 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
-        # - { path: ^/habitacio/new, roles: ROLE_ADMIN }
-        - { path: ^/habitacio, roles: ROLE_USER }
-
+        - { path: ^/habitacio/edit, roles: ROLE_ADMIN }
+        - { path: ^/habitacio/new, roles: ROLE_ADMIN }
+        - { path: ^/habitacio, roles: PUBLIC_ACCESS }
+        - { path: ^/misReservas, roles: ROLE_USER }
+        - { path: ^/event/edit, roles: ROLE_ADMIN }
+        - { path: ^/event/new, roles: ROLE_ADMIN }
+        - { path: ^/event, roles: PUBLIC_ACCESS }
 
         - { path: ^/login, roles: PUBLIC_ACCESS }
         - { path: ^/logout, roles: IS_AUTHENTICATED_FULLY }

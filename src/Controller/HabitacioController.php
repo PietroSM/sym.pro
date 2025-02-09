@@ -96,6 +96,7 @@ final class HabitacioController extends AbstractController
 
     #[Route('/update/{id}', name: 'app_habitacio_update', methods: ['GET'])]
     public function update(HabitacioRepository $habitacioRepository, EntityManagerInterface $entityManager, int $id): Response {
+
         $habitacio = $habitacioRepository->find($id);
         $usuario = $this->getUser();
         $habitacio->setId_Client($usuario);
@@ -111,6 +112,8 @@ final class HabitacioController extends AbstractController
 
     #[Route('/{id}', name:'app_habitacio_delete_json', methods:['DELETE'])]
     public function deleteJson(Habitacio $habitacio, HabitacioRepository $habitacioRepository): Response {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $habitacioRepository->remove($habitacio, true);
         return new JsonResponse(['eliminado' => true]);
     }
@@ -124,9 +127,10 @@ final class HabitacioController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_habitacio_edit', methods: ['GET', 'POST'])]
+    #[Route('/edit/{id}', name: 'app_habitacio_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Habitacio $habitacio, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $form = $this->createForm(HabitacioType::class, $habitacio);
         $form->handleRequest($request);
 

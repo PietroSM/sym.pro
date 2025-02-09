@@ -34,10 +34,10 @@
                 </div>
                 <!-- Buttons for navigation and actions -->
                 <div class="button-group mt-4">
-                    <a href="{{ path('app_event_index') }}" class="btn btn-primary">Volver a la lista</a>
-                    <a href="{{ path('app_event_edit', {'id': event.id}) }}" class="btn btn-warning">Editar</a>
-                    <a href="{{ path('app_event_delete_json',{'id':event.id}) }}" class="btn btn-danger delete">Borrar</a>
-
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('app_event_edit', {'id': event.id}) }}" class="btn btn-warning">Editar</a>
+                        <a href="{{ path('app_event_delete_json',{'id':event.id}) }}" class="btn btn-danger delete">Borrar</a>
+                    {% endif %}
                 </div>
             </div>
         </div>

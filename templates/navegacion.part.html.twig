@@ -49,25 +49,23 @@
                                     <a href={{ path('sym_index') }}>Home</a>
                                 </li>
 
-                                {% if is_granted('ROLE_ADMIN') %}
-                                    {% if app.request.pathinfo=='/habitacio'%}
-                                        <li class="active lien">
-                                    {% else %}
-                                        <li class="lien">
-                                    {% endif %}
-                                        <a href={{ path('app_habitacio_index') }}>Rooms</a>
-                                    </li>
-                                {% endif %}
-
-
-
-                                {% if app.request.pathinfo=='/habitacio/new'%}
+                                {% if app.request.pathinfo=='/habitacio'%}
                                     <li class="active lien">
                                 {% else %}
                                     <li class="lien">
                                 {% endif %}
-                                    <a href={{ path('app_habitacio_new') }}>Insertar Habitación</a>
+                                    <a href={{ path('app_habitacio_index') }}>Rooms</a>
                                 </li>
+
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    {% if app.request.pathinfo=='/habitacio/new'%}
+                                        <li class="active lien">
+                                    {% else %}
+                                        <li class="lien">
+                                    {% endif %}
+                                        <a href={{ path('app_habitacio_new') }}>Insertar Habitación</a>
+                                    </li>
+                                {% endif %}
 
                                 {% if app.request.pathinfo=='/event'%}
                                     <li class="active lien">
@@ -77,23 +75,26 @@
                                     <a href={{ path('app_event_index') }}>Events</a>
                                 </li>
 
-                                {% if app.request.pathinfo=='/event/new'%}
-                                    <li class="active lien">
-                                {% else %}
-                                    <li class="lien">
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    {% if app.request.pathinfo=='/event/new'%}
+                                        <li class="active lien">
+                                    {% else %}
+                                        <li class="lien">
+                                    {% endif %}
+                                        <a href={{ path('app_event_new') }}>Insertar Evento</a>
+                                    </li>
                                 {% endif %}
-                                    <a href={{ path('app_event_new') }}>Insertar Evento</a>
-                                </li>
 
-                                {% if app.request.pathinfo=='/misReservas'%}
-                                    <li class="active lien">
-                                {% else %}
-                                    <li class="lien">
-                                {% endif %}
-                                    <a href={{ path('app_reservas') }}>Mis Reservas</a>
-                                </li>
 
                                 {% if is_granted('IS_AUTHENTICATED') %}
+                                    {% if app.request.pathinfo=='/misReservas'%}
+                                        <li class="active lien">
+                                    {% else %}
+                                        <li class="lien">
+                                    {% endif %}
+                                        <a href={{ path('app_reservas') }}>Mis Reservas</a>
+                                    </li>
+
                                     <li class=" lien"><a href={{ path('app_logout') }}><i class="fa fa-sign-out sr-icons"></i> Logout - {{
                                     app.user.username }}</a></li>
                                 {% else %}
@@ -101,60 +102,6 @@
                                     <li class=" lien"><a href={{ path('app_register') }}> Registrarse</a></li>
                                 {% endif %}
 
-
-                                {# 
-
-                                <?php if (!is_null($app['user']) && 
-                                $app['user']->getRole() == 'ROLE_ADMIN') : ?>
-
-                                    <?php if (Utils::esOpcionMenuActiva('/insertarHab') == true)
-                                        echo '<li class="active">';
-                                    else echo '<li>'; ?>
-                                    <a href="/insertarHab">Insertar Habitacón</a></li>
-
-                                    <?php if (Utils::esOpcionMenuActiva('/insertarEvent') == true)
-                                        echo '<li class="active">';
-                                    else echo '<li>'; ?>
-                                    <a href="/insertarEvent">Insertar Evento</a></li>
-
-                                <?php endif; ?>
-
-
-                                <?php if (Utils::esOpcionMenuActiva('/rooms') == true)
-                                    echo '<li class="active">';
-                                else echo '<li>'; ?>
-                                <a href="/rooms">Habitaciones</a></li>
-
-                                <?php if (Utils::esOpcionMenuActiva('/event') == true)
-                                    echo '<li class="active">';
-                                else echo '<li>'; ?>
-                                <a href="/event">Eventos</a></li>
-
-
-
-
-                                <?php if (is_null($app['user'])) : ?>
-                                    <li class="<?= Utils::esOpcionMenuActiva('/registrar') ? 'active' : '' ?> lien">
-                                        <a href="<?= Utils::esOpcionMenuActiva('/registrar') ? '#' : '/registrar' ?>">
-                                            <i class="fa fa-sign-in sr-icons"></i> Registro</a>
-                                    </li>
-
-                                    <?php if (Utils::esOpcionMenuActiva('/login') == true)
-                                        echo '<li class="active">';
-                                    else echo '<li>'; ?>
-                                    <a href="/login"><i class="fa fa-user-secret sr-icons"></i> logIn</a></li>
-                                <?php else : ?>
-                                    <?php if (Utils::esOpcionMenuActiva('/reservas') == true)
-                                        echo '<li class="active">';
-                                    else echo '<li>'; ?>
-                                    <a href="/reservas">Mis Reservas</a></li>
-
-
-
-                                    <?php if (Utils::esOpcionMenuActiva('/logout') == true) echo '<li class="active lien">';
-                                    else echo '<li class=" lien">'; ?>
-                                    <a href="/logout"><i class="fa fa-sign-out sr-icons"></i> <?= $app['user']->getUsername() ?></a></li>
-                                <?php endif; ?> #}
                             </ul>
                         </nav>
                     </div>

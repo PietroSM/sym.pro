@@ -65,13 +65,27 @@ final class EventController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_event_edit', methods: ['GET', 'POST'])]
+    #[Route('/edit/{id}', name: 'app_event_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Event $event, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // $file almacena el archivo subido
+            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
+            $file = $form['nombreImatge']->getData();
+
+            //Generar un nom unic
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+            // Move the file to the directory where brochures are stored
+            $file->move( $this->getParameter('event_directory_gallery'),$fileName );
+
+            $event->setNombreImatge($fileName);
+
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_event_index', [], Response::HTTP_SEE_OTHER);
@@ -97,6 +111,8 @@ final class EventController extends AbstractController
 
     #[Route('/{id}', name: 'app_event_delete_json', methods:['DELETE'])]
     public function deleteJson(Event $event, EventRepository $eventRepository): Response {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        
         $eventRepository->remove($event, true);
         return new JsonResponse(['eliminado' => true]);
     }
