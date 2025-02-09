@@ -15,8 +15,7 @@
                             <h3>{{ habitacio.nombre }}</h3>
                             <div class="rdt-right">
                                 <a href="{{ path('app_habitacio_delete_json',{'id':habitacio.id}) }}" class="delete">Borrar</a>
-   
-                                {% if habitacio.id is null %}
+                                {% if habitacio.id_client is null %}
                                     <a href="{{ path('app_habitacio_update',{'id':habitacio.id}) }}">Booking Now</a>
                                 {% else %}
                                     <a href="#" disabled>RESERVADO</a>

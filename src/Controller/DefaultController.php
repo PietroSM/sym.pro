@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Repository\EventRepository;
 use App\Repository\HabitacioRepository;
 use App\Utils\Utils;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -42,8 +43,31 @@ class DefaultController extends AbstractController {
             'habitacios' => $habitacions,
         ]);
     }
-    
 
+
+
+    #[Route('/misReservas', 'app_reservas', methods: ['GET'])]
+    public function misReservas(HabitacioRepository $habitacioRepository){
+        $usuario = $this->getUser();
+
+        $habitacions = $habitacioRepository->findByUser($usuario);
+
+        return $this->render('misReservas.html.twig', [
+            'habitacions' => $habitacions,
+        ]);
+    }
+    
+    #[Route('/Cancelar/{id}', name: 'app_habitacio_cancelar', methods: ['GET'])]
+    public function update(HabitacioRepository $habitacioRepository, EntityManagerInterface $entityManager, int $id): Response {
+        $habitacio = $habitacioRepository->find($id);
+        $habitacio->setId_Client(null);
+        $entityManager->flush();
+
+        $habitacio = $habitacioRepository->find($id);
+        return $this->render('habitacio/show.html.twig',[
+            'habitacio' => $habitacio,
+        ]);
+    }
 
 
 

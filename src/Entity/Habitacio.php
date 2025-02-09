@@ -162,7 +162,7 @@ class Habitacio
         return $this->id_client;
     }
 
-    public function setId_Client(USer $id_client): static
+    public function setId_Client(?User $id_client): static
     {
         $this->id_client = $id_client;
 

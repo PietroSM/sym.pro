@@ -85,6 +85,14 @@
                                     <a href={{ path('app_event_new') }}>Insertar Evento</a>
                                 </li>
 
+                                {% if app.request.pathinfo=='/misReservas'%}
+                                    <li class="active lien">
+                                {% else %}
+                                    <li class="lien">
+                                {% endif %}
+                                    <a href={{ path('app_reservas') }}>Mis Reservas</a>
+                                </li>
+
                                 {% if is_granted('IS_AUTHENTICATED') %}
                                     <li class=" lien"><a href={{ path('app_logout') }}><i class="fa fa-sign-out sr-icons"></i> Logout - {{
                                     app.user.username }}</a></li>

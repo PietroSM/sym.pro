@@ -52,6 +52,16 @@ class HabitacioRepository extends ServiceEntityRepository
     }
 
 
+    public function findByUser($user)
+    {
+        return $this->createQueryBuilder('h')
+            ->andWhere('h.id_client = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult();
+    }
+
+
     //    /**
     //     * @return Habitacio[] Returns an array of Habitacio objects
     //     */
